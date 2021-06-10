@@ -4,7 +4,7 @@ import AddItem from "./addItem";
 
 const rootReducer = combineReducers({
   items: ItemsReducer,
-  item: AddItem
+  outfitItems: AddItem
 });
 
 export default rootReducer;

@@ -17,10 +17,10 @@ export function getItems(data) {
   })
 };
 
-export function getItemById(item) {
-  console.log(item);
+export function getItemById(outfitItems) {
+  console.log(outfitItems);
 
-  return axios.get("http://localhost:8000/items/"+ item)
+  return axios.get("http://localhost:8000/items/"+ outfitItems)
    .then(response => {
       return {
         type: ADD_ITEM_TO_OUTFIT,
@@ -30,4 +30,4 @@ export function getItemById(item) {
     .catch(error => {
       alert("Error!!!!!!!!!");
     })
-}
+};

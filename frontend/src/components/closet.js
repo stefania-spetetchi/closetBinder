@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { getItems } from "../actions";
 import NavBar from "./navBar";
 import Items from "./items";
-import AddItem from "./add-item";
 import "./style.css";
 
 const ClosetItems = () => {
@@ -18,7 +17,6 @@ const ClosetItems = () => {
   return (
     <div>
       <NavBar />
-      <AddItem />
       <div className="closet-container main-layout">
       <Items items={items} /> 
       </div>

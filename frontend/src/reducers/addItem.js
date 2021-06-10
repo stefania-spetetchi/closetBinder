@@ -1,12 +1,13 @@
 import { ADD_ITEM_TO_OUTFIT } from "../actions";
 
-const defaultState = {};
+const defaultState = {outfitItems: []};
 
 const AddItem = function (state = defaultState, action) {
   switch (action.type) {
     case ADD_ITEM_TO_OUTFIT:
       return {
-        item: action.payload
+        ...state,
+        outfitItems: [action.payload, ...state.outfitItems]
       };
     default:
       return state;
