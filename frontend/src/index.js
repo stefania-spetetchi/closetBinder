@@ -7,8 +7,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 import ClosetItems from "./components/closet";
 import FrontPage from "./components/frontPage";
+import Outfits from "./components/outfits";
 import reducers from "./reducers";
 import "bootstrap/dist/css/bootstrap.min.css";
+import AddToOutfitButton from "./components/addToOutfitButton";
 
 const createStoreWithMiddleWare = applyMiddleware(promise)(createStore);
 
@@ -18,6 +20,12 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={FrontPage} />
           <Route path="/closet" component={ClosetItems}/>
+          <Route path="/outfits" component={Outfits}>
+            <Outfits>
+            
+            </Outfits>
+              
+            </Route>
         </Switch>
     </BrowserRouter>
   </Provider>,

@@ -1,4 +1,5 @@
 import _ from "lodash";
+import "./style.css";
 
 const Items = (props) => {
   if (!_.isEmpty(props.items)) {
