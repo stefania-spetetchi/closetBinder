@@ -1,10 +1,10 @@
-import { combineReducers } from "redux";
-import ItemsReducer from "./itemsReducer";
-import AddItem from "./addItem";
+import { combineReducers } from 'redux';
+import ItemsReducer from './itemsReducer';
+import AddItem from './addItem';
 
 const rootReducer = combineReducers({
   items: ItemsReducer,
-  outfitItems: AddItem
+  outfitItems: AddItem,
 });
 
 export default rootReducer;
