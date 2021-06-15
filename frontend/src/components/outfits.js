@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import _ from 'lodash';
 import {
   getItems,
-  getItemById,
+  addItemToOutfit,
   removeItemById,
   createOutfit,
   startOver,
@@ -14,7 +15,6 @@ import './style.css';
 const Outfits = () => {
   const { items } = useSelector((state) => state.items);
   const dispatch = useDispatch();
-  const [isActive, setActive] = useState(false);
   const { outfitItems } = useSelector((state) => state.outfitItems);
 
   useEffect(() => {
@@ -24,8 +24,18 @@ const Outfits = () => {
 
   const handleAdd = (searchId) => {
     const newItem = items.filter((item) => item._id === searchId);
-    setActive(!isActive);
-    dispatch(getItemById(newItem));
+    const outfitItemsCategories = outfitItems.map((a) => a.category);
+    const outfitItemsIds = outfitItems.map((a) => a._id);
+    if (
+      newItem[0].category === 'Shoes' &&
+      outfitItemsCategories.includes(newItem[0].category)
+    ) {
+      return console.log('alert1');
+    }
+    if (outfitItemsIds.includes(newItem[0]._id)) {
+      return console.log('alert2');
+    }
+    dispatch(addItemToOutfit(newItem));
   };
 
   const handleRemove = (searchId) => {
@@ -39,6 +49,31 @@ const Outfits = () => {
   const handleStartOver = () => {
     dispatch(startOver(outfitItems));
   };
+
+  function renderTempOutfit() {
+    if (!_.isEmpty(outfitItems)) {
+      return outfitItems.map((nestedItem) => (
+        <div className="container-outfit">
+          <img
+            key={nestedItem._id}
+            remItemId={nestedItem._id}
+            src={nestedItem?.imageUrl}
+            alt=""
+            width="75"
+            className="items-in-outfit"
+          />
+          <button
+            type="submit"
+            className="remove-item-from-outfit"
+            onClick={() => handleRemove(nestedItem._id)}
+          >
+            Remove
+          </button>
+        </div>
+      ));
+    }
+    return <p>Oops! this is empty! Start adding items from your closet</p>;
+  }
 
   return (
     <div>
@@ -54,41 +89,25 @@ const Outfits = () => {
                 itemId={item._id}
                 src={item.imageUrl}
                 alt=""
-                width="75"
+                width="100"
                 className="items"
               />
+              <p className="category-label">{item.category}</p>
               <button
                 type="submit"
-                className="btn-add"
+                className="add-item-to-outfit"
                 onClick={() => handleAdd(item._id)}
               >
                 Add
               </button>
             </div>
           ))}
+          <handleAdd />
         </div>
 
         <h6>Your Outfit:</h6>
         <div className="temporary-outfit">
-          {outfitItems.map((nestedItem) => (
-            <div className="container-outfit">
-              <img
-                key={nestedItem._id}
-                remItemId={nestedItem._id}
-                src={nestedItem?.imageUrl}
-                alt=""
-                width="75"
-                className="items-in-outfit"
-              />
-              <button
-                type="submit"
-                className="btn-remove"
-                onClick={() => handleRemove(nestedItem._id)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
+          {renderTempOutfit()}
           <button
             onClick={() => handleCreate()}
             className="create-outfit"

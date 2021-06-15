@@ -15,11 +15,11 @@ export function getItems() {
       payload: response.data,
     }))
     .catch((error) => {
-      alert('Error!!');
+      alert('Error!!!!');
     });
 }
 
-export function getItemById(newItem) {
+export function addItemToOutfit(newItem) {
   console.log('newItem: ', newItem);
   return {
     type: ADD_ITEM_TO_OUTFIT,
@@ -72,7 +72,7 @@ export function deleteOutfit(outfitId) {
     .delete(`http://localhost:8000/outfits/${outfitId}`)
     .then(() => getOutfits())
     .catch((error) => {
-      alert('Error!!');
+      alert('Error!!!');
     });
 }
 

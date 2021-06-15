@@ -34,7 +34,8 @@ const AddItem = () => {
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: 'auto' }}>
+    <div className="col-md-6 offset-md-3 upload-form">
+      <h5>Add more items to your closet:</h5>
       <div className="mb-3">
         <select
           className="form-control"
@@ -66,7 +67,7 @@ const AddItem = () => {
       </div>
       <div className="text-center">
         <button
-          className="btn btn-primary"
+          className="uploadItem btn-primary"
           onClick={handleSubmit}
           type="submit"
         >

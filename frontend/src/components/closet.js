@@ -18,10 +18,10 @@ const ClosetItems = () => {
   return (
     <div>
       <NavBar />
+      <AddItem />
       <div className="closet-container main-layout" key="_id">
         <Items items={items} />
       </div>
-      <AddItem />
     </div>
   );
 };

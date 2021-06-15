@@ -1,3 +1,5 @@
+import './style.css';
+
 function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light text-center">
@@ -19,24 +21,32 @@ function NavBar() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <a className="nav-link" href="/">
-                <button type="submit">
-                  <strong>Home</strong>
+                <button className="homeButton" type="submit">
+                  <h5>
+                    <strong>Home</strong>
+                  </h5>
                 </button>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/closet">
-                <button type="submit">Closet</button>
+                <button className="frontButton" type="submit">
+                  Closet
+                </button>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/outfits">
-                <button type="submit">Outfits</button>
+                <button className="frontButton" type="submit">
+                  Outfits
+                </button>
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/calendar">
-                <button type="submit">Calendar</button>
+                <button className="frontButton" type="submit">
+                  Calendar
+                </button>
               </a>
             </li>
           </ul>

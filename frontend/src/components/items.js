@@ -16,17 +16,17 @@ const Items = (props) => {
     return props.items.map((item) => (
       <div>
         <div className="closet-layout col-md-3">
-          <div className="items">
+          <div className="items-in-closet">
             <img
               key="item._id"
               className="closet-item"
               src={item.imageUrl}
               alt="new"
-              height="150"
+              height="200"
             />
             <button
               type="button"
-              className="btn-close"
+              className="delete-item btn-close"
               aria-label="Close"
               onClick={() => handleRemoveItem(item._id)}
             />

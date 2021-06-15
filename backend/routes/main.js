@@ -30,24 +30,24 @@ router.post("/outfits", async (req, res) => {
   const newOutfit = new Outfit({
     items: req.body
   });
-  await newOutfit
-    .save(newOutfit)
+  await newOutfit.save(newOutfit)
     res.json(newOutfit);
   } catch (err) {
-      console.log(err);
-    }
+    console.log(err);
+  }
 });
 
 router.get("/outfits", (req, res, next) => {
   Outfit
-    .find((error, outfits) => {
+    .find((err, outfits) => {
     res.send(outfits); 
   })
     .populate("items")
     .then(outfitsFound => {
     if (!outfitsFound) { return res.status(404).end(); }
+    else if (outfitsFound) {
     return res.status(200).json(outfitsFound);
-  })
+    }})
     .catch(err => next(err))
 });
 
@@ -70,8 +70,9 @@ router.delete("/outfits/:outfit", (req, res) => {
   Outfit.findByIdAndRemove(req.params.outfit)
     .then(outfitFound => {
       if (!outfitFound) { return res.status(404).end(); }
+      else if (outfitFound) {
       return res.status(200).json(outfitFound);
-    })
+    }})
     .catch(err => next(err))
 });
 
@@ -79,7 +80,9 @@ router.delete("/items/:item", (req, res) => {
   Item.findByIdAndRemove(req.params.item)
     .then(itemFound => {
       if (!itemFound) { return res.status(404).end(); }
+      else if (itemFound) {
       return res.status(200).json(itemFound);
+    }
     })
     .catch(err => next(err))
 });
