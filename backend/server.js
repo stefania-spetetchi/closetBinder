@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const bodyParser = require("./node_modules/body-parser");
 const mainRoutes = require("./routes/main");
@@ -10,7 +11,9 @@ const User = require("./user");
 const app = express();
 
 mongoose.connect("mongodb://localhost/closet-binder", {
+  useCreateIndex: true,
   useNewUrlParser: true,
+  useFindAndModify: false,
   useUnifiedTopology: true,
 });
 
@@ -28,6 +31,7 @@ app.use(express.json());
 app.use(express.static('node_modules'));
 
 app.use(mainRoutes);
+app.use("./models/item", require("./routes/main"))
 
 app.listen(8000, () => {
   console.log("Node.js listening on port " + 8000);

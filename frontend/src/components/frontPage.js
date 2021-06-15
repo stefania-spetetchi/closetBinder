@@ -1,6 +1,6 @@
 import NavBar from './navBar';
 
-const FrontPage = (props) => (
+const FrontPage = () => (
   <div>
     <NavBar />
     <div className="text-center">

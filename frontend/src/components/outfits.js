@@ -1,15 +1,21 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState, setState } from 'react';
-import { getItems, getItemById, removeItemById } from '../actions';
+import { useEffect, useState } from 'react';
+import {
+  getItems,
+  getItemById,
+  removeItemById,
+  createOutfit,
+  startOver,
+} from '../actions';
 import NavBar from './navBar';
+import OutfitsView from './outfitsView';
 import './style.css';
 
 const Outfits = () => {
   const { items } = useSelector((state) => state.items);
   const dispatch = useDispatch();
-  // const [outfitItems, setOutfitItems] = useState();
+  const [isActive, setActive] = useState(false);
   const { outfitItems } = useSelector((state) => state.outfitItems);
-  console.log(outfitItems);
 
   useEffect(() => {
     dispatch(getItems());
@@ -18,17 +24,20 @@ const Outfits = () => {
 
   const handleAdd = (searchId) => {
     const newItem = items.filter((item) => item._id === searchId);
-    console.log(newItem);
+    setActive(!isActive);
     dispatch(getItemById(newItem));
   };
 
   const handleRemove = (searchId) => {
-    // const removeItem = outfitItems.filter(
-    //   (outfitItem) => outfitItem._id === searchId
-    // );
-    console.log(searchId);
-    // console.log(removeItem);
     dispatch(removeItemById(searchId));
+  };
+
+  const handleCreate = () => {
+    dispatch(createOutfit(outfitItems));
+  };
+
+  const handleStartOver = () => {
+    dispatch(startOver(outfitItems));
   };
 
   return (
@@ -80,6 +89,23 @@ const Outfits = () => {
               </button>
             </div>
           ))}
+          <button
+            onClick={() => handleCreate()}
+            className="create-outfit"
+            type="submit"
+          >
+            Create Outfit
+          </button>
+          <button
+            onClick={() => handleStartOver()}
+            className="start-over"
+            type="submit"
+          >
+            Start Over
+          </button>
+        </div>
+        <div>
+          <OutfitsView />
         </div>
       </div>
     </div>

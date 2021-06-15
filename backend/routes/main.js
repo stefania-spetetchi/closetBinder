@@ -1,19 +1,12 @@
+require('dotenv').config();
 const express = require("../node_modules/express");
 const router = express.Router();
-const faker = require("faker");
 const Item = require("../models/item");
 const Outfit = require("../models/outfit");
-require('dotenv').config();
-const cloudinary = require("cloudinary");
-const formData = require('express-form-data');
+const cloudinary = require('../utils/cloudinary');
+const upload = require("../utils/multer");
 const cors = require('cors');
 const app = express();
-
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME,
-//   api_key: process.env.API_KEY,
-//   api_secret: process.env.API_SECRET
-// });
 
 app.use(cors());
 
@@ -32,27 +25,63 @@ router.get("/items/:item", (req, res, next) => {
     .catch((err) => next(err))
 });
 
-router.post("/items", (req, res) => {
-  Item.create(req.body, function(err, item) {
-    if (err) {
-      return res.status(401);
-    } 
-    res.status(200).json(item);
-  })
+router.post("/outfits", async (req, res) => {
+  try {
+  const newOutfit = new Outfit({
+    items: req.body
+  });
+  await newOutfit
+    .save(newOutfit)
+    res.json(newOutfit);
+  } catch (err) {
+      console.log(err);
+    }
 });
 
+router.get("/outfits", (req, res, next) => {
+  Outfit
+    .find((error, outfits) => {
+    res.send(outfits); 
+  })
+    .populate("items")
+    .then(outfitsFound => {
+    if (!outfitsFound) { return res.status(404).end(); }
+    return res.status(200).json(outfitsFound);
+  })
+    .catch(err => next(err))
+});
 
-// router.get("/generate-fake-data", (req, res, next) => {
-//   for (let i = 0; i < 8; i++) {
-//     let item = new Item();
-//     item.category = faker.commerce.department();
-//     item.imageUrl = "https://lp.stories.com/app005prod?set=key%5Bresolve.pixelRatio%5D,value%5B1%5D&set=key%5Bresolve.width%5D,value%5B350%5D&set=key%5Bresolve.height%5D,value%5B10000%5D&set=key%5Bresolve.imageFit%5D,value%5Bcontainerwidth%5D&set=key%5Bresolve.allowImageUpscaling%5D,value%5B0%5D&set=key%5Bresolve.format%5D,value%5Bwebp%5D&set=key%5Bresolve.quality%5D,value%5B90%5D&set=ImageVersion%5B1%5D,origin%5Bdam%5D,source%5B/64/da/64da0420cc6c86cd5de505e40441e97cbf69a882.jpg%5D,type%5BDESCRIPTIVESTILLLIFE%5D&call=url%5Bfile:/product/dynamic.chain%5D";
-//     item.save((err) => {
-//       if (err) throw err;
-//     });
-//   }
-//   res.end();
-// });
+router.post("/items", upload.single("image"), async (req, res) => {
+  try {
+    const result = await cloudinary?.uploader.upload(req.file.path);
+    let item = new Item({
+      outfits: [],
+      category: req.body.category,
+      cloudinary_id: result.public_id,
+      imageUrl: result.url,
+    });
+    await item.save();
+    res.json(item);
+  } catch (err) {
+    console.log(err);
+  }}); 
 
+router.delete("/outfits/:outfit", (req, res) => {
+  Outfit.findByIdAndRemove(req.params.outfit)
+    .then(outfitFound => {
+      if (!outfitFound) { return res.status(404).end(); }
+      return res.status(200).json(outfitFound);
+    })
+    .catch(err => next(err))
+});
+
+router.delete("/items/:item", (req, res) => {
+  Item.findByIdAndRemove(req.params.item)
+    .then(itemFound => {
+      if (!itemFound) { return res.status(404).end(); }
+      return res.status(200).json(itemFound);
+    })
+    .catch(err => next(err))
+});
 
 module.exports = router;

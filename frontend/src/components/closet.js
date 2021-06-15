@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { getItems } from '../actions';
 import NavBar from './navBar';
 import Items from './items';
+import AddItem from './addItem';
 import './style.css';
 
 const ClosetItems = () => {
@@ -17,9 +18,10 @@ const ClosetItems = () => {
   return (
     <div>
       <NavBar />
-      <div className="closet-container main-layout">
+      <div className="closet-container main-layout" key="_id">
         <Items items={items} />
       </div>
+      <AddItem />
     </div>
   );
 };
