@@ -30,7 +30,12 @@ const Outfits = () => {
       newItem[0].category === 'Shoes' &&
       outfitItemsCategories.includes(newItem[0].category)
     ) {
-      return console.log('alert1');
+      // return console.log('alert1');
+      return (
+        <div className="alert alert-danger" role="alert">
+          This is a danger alert—check it out!
+        </div>
+      );
     }
     if (outfitItemsIds.includes(newItem[0]._id)) {
       return console.log('alert2');

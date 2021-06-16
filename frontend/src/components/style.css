@@ -76,7 +76,7 @@ option {
 
 .closet-container {
   position: absolute;
-  margin-top: 30px;
+  margin-top: 10px;
   border: solid 0.5px #A10115;
 }
 
@@ -313,4 +313,24 @@ h6 {
 
 .error {
   margin-left: 20px;
+}
+
+.filterQuery {
+  margin-left: 15px;
+}
+
+.css-1bl8mcx-Control {
+  position: relative;
+}
+
+.css-g1d714-ValueContainer {
+  border: solid 0.5px #A10115;
+  background-color: #F0EFEA;
+  border-radius: 25px;
+  position: absolute;
+} 
+
+.css-1hb7zxy-IndicatorsContainer {
+  background-color: #F0EFEA;
+
 }

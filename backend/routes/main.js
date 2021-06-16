@@ -6,17 +6,45 @@ const Outfit = require("../models/outfit");
 const cloudinary = require('../utils/cloudinary');
 const upload = require("../utils/multer");
 const cors = require('cors');
+const url = require("url");
+var querystring = require('querystring');
+var bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
+router.use(bodyParser.json());
+
+// router.get("/items", (req, res, next) => {
+//   Item.find((error, items) => {
+//     res.send(items);
+//   });
+// });
 
 router.get("/items", (req, res, next) => {
-  Item.find((error, items) => {
-    res.send(items);
-  });
+  let query = {};
+  if (req.query.category) query['category'] = req.query.category;
+
+  Item
+    .find(query)
+    .exec((err, items) => {
+      Item.count().exec((err, count) => {
+        if (err) return next(err);
+
+        res.send(items);
+      })
+    })
 });
 
 router.get("/items/:item", (req, res, next) => {
+  Item.findById(req.params.item)
+    .then(itemFound => {
+      if (!itemFound) { return req.status(403).end();}
+      return res.status(200).json(itemFound);
+    })
+    .catch((err) => next(err))
+});
+
+router.get("/items/:category", (req, res, next) => {
   Item.findById(req.params.item)
     .then(itemFound => {
       if (!itemFound) { return req.status(403).end();}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 
 export const GET_ITEMS = 'GET_ITEMS';
 export const ADD_ITEM_TO_OUTFIT = 'ADD_ITEM_TO_OUTFIT';
@@ -7,9 +8,23 @@ export const GET_OUTFITS = 'GET_OUTFITS';
 export const POST_OUTFIT = 'POST_OUTFIT';
 export const REMOVE_ALL_ITEMS_FROM_OUTFIT = 'REMOVE_ALL_ITEMS_FROM_OUTFIT';
 
-export function getItems() {
+export function getItems(categoryQuery) {
+  const inputs = {};
+
+  if (categoryQuery) inputs.category = categoryQuery;
+  if (!_.isEmpty(inputs)) {
+    return axios
+      .get(`http://localhost:8000/items?category=${categoryQuery}`)
+      .then((response) => ({
+        type: GET_ITEMS,
+        payload: response.data,
+      }))
+      .catch((error) => {
+        alert('Error!!!!');
+      });
+  }
   return axios
-    .get('http://localhost:8000/items')
+    .get(`http://localhost:8000/items`)
     .then((response) => ({
       type: GET_ITEMS,
       payload: response.data,
