@@ -38,10 +38,11 @@ const OutfitsView = () => {
                   );
                 })}
                 <button
+                  className="delete-outfit"
                   type="submit"
                   onClick={() => handleOutfitDelete(outfit._id)}
                 >
-                  Remove
+                  Delete
                 </button>
               </div>
             );

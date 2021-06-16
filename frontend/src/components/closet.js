@@ -18,6 +18,7 @@ const ClosetItems = () => {
   return (
     <div>
       <NavBar />
+      <h5 className="heading-subpage display-5">Your Closet</h5>
       <AddItem />
       <div className="closet-container main-layout" key="_id">
         <Items items={items} />

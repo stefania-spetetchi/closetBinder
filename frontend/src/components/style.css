@@ -1,9 +1,10 @@
 body {
-  background-color: #F0F8FF !important;
+  background-color: #F0EFEA !important;
 } 
 
 .navbar {
-  background-color: #86c5d8 !important;
+  background-color: #A10115 !important;
+  color: white
 }
 .container {
   position: relative;
@@ -16,8 +17,7 @@ body {
   color: black !important;
   text-decoration: none;
   border: none;
-  background-color: #86c5d8;
-  opacity: 60%;
+  background-color: #D72C16;
   padding: 0;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
@@ -36,6 +36,21 @@ body {
   text-align: center;  
 }
 
+.mb-3 {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.form-control {
+  border-radius: 25px !important;
+  background-color: #F0EFEA !important;
+  font-weight: 200 !important;
+}
+
+option {
+  background-color: #ffffcc !important;
+  font-weight: 200 !important;
+}
+
 .items {
   margin: 10px; 
 }
@@ -50,15 +65,40 @@ body {
   margin: 10px; 
 }
 
+.outfits-layout {
+    /* display: flex;
+    flex-wrap: wrap; */
+    margin: 10px; 
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
 .closet-container {
-  border: solid 0.5px black;
+  position: absolute;
+  margin-top: 30px;
+  border: solid 0.5px #A10115;
+}
+
+.items-in-closet {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6.3px;
+  position: relative;
+  width: 50%;
+}
+
+.container-add {
+  display: inline-block;
+  position: relative;
+  margin: 2px;
 }
 
 .add-item-button {
   margin: 10px;
   text-decoration: none;
   border: none;
-  background-color: #86c5d8;
+  background-color: #D72C16;
   opacity: 60%;
   padding: 0;
   cursor: pointer;
@@ -70,8 +110,6 @@ body {
   margin-top: 20px;
 }
 
-
-
 .btn-add {
   position: absolute;
   bottom: 0;
@@ -80,9 +118,11 @@ body {
 
 .temporary-outfit {
   margin: 10px;
-  border: solid 0.5px black;
+  border: solid 0.5px #A10115;
   display: flex;
   flex-wrap: wrap;
+  border-radius: 5px;
+  position: relative;
 }
 
 .items-in-outfit {
@@ -100,16 +140,19 @@ body {
 }
 
 .outfit {
-  border: solid 0.5px black;
+  border: solid 0.5px #C0B2B5;
   margin: 5px;
+  position: relative;
 }
 
 .outfits-container {
-  border: solid 0.5px black;
+  border: solid 0.5px #C0B2B5;
+  border-radius: 5px;
 }
 
 .frontButton {
   border: none;
+  color: #F0EFEA;
   background-color: transparent;
   padding: 0;
   cursor: pointer;
@@ -118,6 +161,7 @@ body {
 
 .homeButton {
   border: none;
+  color:#F0EFEA !important;
   background-color: transparent;
   padding: 0;
   cursor: pointer;
@@ -134,19 +178,13 @@ body {
   left: 50%;
 }
 
-.items-in-closet {
-  margin: 3px;
-  position: relative;
-  width: 50%;
-}
-
 .uploadItem {
-  padding: 5px 10px !important;
+  padding: 5px 20px !important;
   text-decoration: none;
-  border: none;
-  color: black !important;
-  background-color: #86c5d8 !important;
-  opacity: 60% !important;
+  border: solid #A10115 !important;
+  color: #F0EFEA !important;
+  font-weight: 800;
+  background-color: #D72C16 !important;
   padding: 0;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
@@ -155,82 +193,124 @@ body {
 
 .upload-form {
   margin-top: 20px !important;
-  
-}
-
-.container-add {
-  position: relative;
 }
 
 .add-item-to-outfit {
   position: absolute;
-  bottom:  5%;
+  bottom:  2%;
   left: 70%;
-  padding: 2px 5px !important;
+  padding: 0px 5px !important;
   text-decoration: none;
-  border: none;
-  color: black !important;
-  background-color: #86c5d8 !important;
-  opacity: 60% !important;
+  color: #F0EFEA !important;
+  background-color: #D72C16 !important;
   cursor: pointer;
   font-size: small;
   font-family: 'Montserrat', sans-serif;
   border-radius: 25px;
+  border: solid .02em #A10115 !important;
 }
 
 .category-label {
   position: absolute;
   top: 5%;
   left: 0%;
-  background-color: #86c5d8 !important;
-  opacity: 60% !important;
+  border: solid .02em #A10115 !important;
+  background-color: #C0B2B5 !important;
+  color: black;
   font-size: x-small;
-  border-radius: 5px;
+  font-weight: 600;
   padding: 0px 5px;
 }
 
 .remove-item-from-outfit {
   position: absolute;
   bottom:  0%;
-  left: 40%;
+  left: 45%;
   padding: 2px 5px !important;
   text-decoration: none;
-  border: none;
-  color: black !important;
-  background-color: #86c5d8 !important;
-  opacity: 60% !important;
+  color: #F0EFEA !important;
+  background-color: #D72C16 !important;
   cursor: pointer;
-  font-size: small;
+  font-size: x-small;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   border-radius: 25px;
+  border: solid .02em #A10115 !important;
 }
 
 .create-outfit {
   margin: 10px;
-  color: black !important;
+  padding: 2px 10px !important;
+  color:#A10115 !important;
   text-decoration: none;
   border: none;
-  background-color: #86c5d8;
-  opacity: 60%;
-  padding: 0;
+  background-color: #A10115;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   border-radius: 25px;
+  border: solid #C0B2B5 !important;
+  background-color: #F0EFEA !important;
+  cursor: pointer;
 }
 
 .start-over {
   margin: 10px;
-  color: black !important;
+  padding: 2px 10px !important;
+  color:#A10115!important;
   text-decoration: none;
   border: none;
-  background-color: #86c5d8;
-  opacity: 60%;
-  padding: 0;
+  background-color: #A10115;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   border-radius: 25px;
+  border: solid #C0B2B5 !important;
+  background-color: #F0EFEA !important;
+  cursor: pointer;
+}
+
+.delete-outfit {
+  margin: 10px 10px 10px 15px;
+  padding: 1px 7px !important;
+  color: black !important;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 25px;
+  border: solid 0.05em #C0B2B5 !important;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .calendar {
   margin: 10px;
+}
+
+p {
+  font-size: smaller;
+  color:#A10115;
+  font-style: italic;
+}
+
+h5 {
+  color:#A10115
+}
+
+h6 {
+  color:#A10115;
+  margin: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.heading-subpage {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.create-and-startOver {
+  margin-top: 30px;
+}
+
+.error {
+  margin-left: 20px;
 }

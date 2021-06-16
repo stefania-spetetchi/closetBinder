@@ -22,7 +22,7 @@ function NavBar() {
             <li className="nav-item">
               <a className="nav-link" href="/">
                 <button className="homeButton" type="submit">
-                  <h5>
+                  <h5 className="homeButton">
                     <strong>Home</strong>
                   </h5>
                 </button>

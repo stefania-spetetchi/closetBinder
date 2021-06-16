@@ -57,7 +57,7 @@ const Outfits = () => {
           <img
             key={item._id}
             // eslint-disable-next-line react/no-unknown-property
-            itemId={item._id}
+            // itemId={item._id}
             src={item.imageUrl}
             alt=""
             width="100"
@@ -65,8 +65,9 @@ const Outfits = () => {
           />
           <p className="category-label">{item.category}</p>
           <button
-            type="submit"
-            className="add-item-to-outfit"
+            type="button"
+            aria-label="Add"
+            className="fas fa-plus add-item-to-outfit"
             onClick={() => handleAdd(item._id)}
           >
             Add
@@ -78,59 +79,69 @@ const Outfits = () => {
   }
 
   function renderTempOutfit() {
-    console.log(outfitItems);
     const sortedOutfitItems = outfitItems.sort((a, b) =>
       a.category.localeCompare(b.category)
     );
-    console.log(sortedOutfitItems);
     if (!_.isEmpty(outfitItems)) {
-      return sortedOutfitItems.map((nestedItem) => (
-        <div className="container-outfit">
-          <img
-            key={nestedItem._id}
-            remItemId={nestedItem._id}
-            src={nestedItem?.imageUrl}
-            alt=""
-            width="75"
-            className="items-in-outfit"
-          />
-          <button
-            type="submit"
-            className="remove-item-from-outfit"
-            onClick={() => handleRemove(nestedItem._id)}
-          >
-            Remove
-          </button>
+      return (
+        <div className="temporary-outfit">
+          {sortedOutfitItems.map((nestedItem) => (
+            <div>
+              <div className="container-outfit">
+                <img
+                  key={nestedItem._id}
+                  // remItemId={nestedItem._id}
+                  src={nestedItem?.imageUrl}
+                  alt=""
+                  width="75"
+                  className="items-in-outfit"
+                />
+                <button
+                  type="submit"
+                  className="remove-item-from-outfit"
+                  onClick={() => handleRemove(nestedItem._id)}
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          ))}
+          <div className="create-and-startOver">
+            <button
+              onClick={() => handleCreate()}
+              className="create-outfit"
+              type="submit"
+            >
+              Create Outfit
+            </button>
+            <button
+              onClick={() => handleStartOver()}
+              className="start-over"
+              type="submit"
+            >
+              Start Over
+            </button>
+          </div>
         </div>
-      ));
+      );
     }
-    return <p>Oops! this is empty! Start adding items from your closet</p>;
+    return (
+      <p className="error">
+        Oops! this is empty! Start adding items from your close!
+      </p>
+    );
   }
 
   return (
     <div>
       <NavBar />
+      <h5 className="heading-subpage display-5">Your Outfits Page</h5>
       <div className="closet-section">
-        <h6>This is your closet, click Add on items to create an outfit:</h6>
-        <div className="closet-container main-layout">{renderItems()}</div>
+        <div className="outfits-container outfits-layout">{renderItems()}</div>
+        <br />
         <h6>Your Outfit:</h6>
-        <div className="temporary-outfit">
-          {renderTempOutfit()}
-          <button
-            onClick={() => handleCreate()}
-            className="create-outfit"
-            type="submit"
-          >
-            Create Outfit
-          </button>
-          <button
-            onClick={() => handleStartOver()}
-            className="start-over"
-            type="submit"
-          >
-            Start Over
-          </button>
-        </div>
+        <div>{renderTempOutfit()}</div>
+        <br />
         <div>
           <OutfitsView />
         </div>
