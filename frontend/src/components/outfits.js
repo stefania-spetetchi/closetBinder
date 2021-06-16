@@ -50,9 +50,41 @@ const Outfits = () => {
     dispatch(startOver(outfitItems));
   };
 
+  function renderItems() {
+    if (!_.isEmpty(items)) {
+      return items?.map((item) => (
+        <div className="container-add">
+          <img
+            key={item._id}
+            // eslint-disable-next-line react/no-unknown-property
+            itemId={item._id}
+            src={item.imageUrl}
+            alt=""
+            width="100"
+            className="items"
+          />
+          <p className="category-label">{item.category}</p>
+          <button
+            type="submit"
+            className="add-item-to-outfit"
+            onClick={() => handleAdd(item._id)}
+          >
+            Add
+          </button>
+        </div>
+      ));
+    }
+    return <p>Oops! Your closet is empty!</p>;
+  }
+
   function renderTempOutfit() {
+    console.log(outfitItems);
+    const sortedOutfitItems = outfitItems.sort((a, b) =>
+      a.category.localeCompare(b.category)
+    );
+    console.log(sortedOutfitItems);
     if (!_.isEmpty(outfitItems)) {
-      return outfitItems.map((nestedItem) => (
+      return sortedOutfitItems.map((nestedItem) => (
         <div className="container-outfit">
           <img
             key={nestedItem._id}
@@ -80,31 +112,7 @@ const Outfits = () => {
       <NavBar />
       <div className="closet-section">
         <h6>This is your closet, click Add on items to create an outfit:</h6>
-        <div className="closet-container main-layout">
-          {items?.map((item) => (
-            <div className="container-add">
-              <img
-                key={item._id}
-                // eslint-disable-next-line react/no-unknown-property
-                itemId={item._id}
-                src={item.imageUrl}
-                alt=""
-                width="100"
-                className="items"
-              />
-              <p className="category-label">{item.category}</p>
-              <button
-                type="submit"
-                className="add-item-to-outfit"
-                onClick={() => handleAdd(item._id)}
-              >
-                Add
-              </button>
-            </div>
-          ))}
-          <handleAdd />
-        </div>
-
+        <div className="closet-container main-layout">{renderItems()}</div>
         <h6>Your Outfit:</h6>
         <div className="temporary-outfit">
           {renderTempOutfit()}

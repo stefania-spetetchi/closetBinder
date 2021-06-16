@@ -230,3 +230,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   border-radius: 25px;
 }
+
+.calendar {
+  margin: 10px;
+}
