@@ -46,6 +46,11 @@ body {
   font-weight: 200 !important;
 }
 
+.outfit.form-control {
+  margin-left: 10px;
+  border: solid 1px #C0B2B5 !important
+}
+
 option {
   background-color: #ffffcc !important;
   font-weight: 200 !important;
@@ -222,6 +227,15 @@ option {
   padding: 0px 5px;
 }
 
+.outfit-category-label {
+  border: none;
+  background-color: transparent;
+  color: #A10115;
+  font-size: small;
+  font-weight: 600;
+  text-align: center;
+}
+
 .remove-item-from-outfit {
   position: absolute;
   bottom:  0%;
@@ -269,13 +283,14 @@ option {
 }
 
 .delete-outfit {
-  margin: 10px 10px 10px 15px;
+  margin: 10px 10px 10px 20px;
   padding: 1px 7px !important;
   color: black !important;
   text-decoration: none;
   border: none;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
+  font-size: small;
   border-radius: 25px;
   border: solid 0.05em #C0B2B5 !important;
   background-color: transparent;
@@ -297,7 +312,7 @@ h5 {
 }
 
 h6 {
-  color:#A10115;
+  color:black;
   margin: 20px;
   font-family: 'Montserrat', sans-serif;
 }

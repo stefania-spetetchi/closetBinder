@@ -14,12 +14,6 @@ const app = express();
 app.use(cors());
 router.use(bodyParser.json());
 
-// router.get("/items", (req, res, next) => {
-//   Item.find((error, items) => {
-//     res.send(items);
-//   });
-// });
-
 router.get("/items", (req, res, next) => {
   let query = {};
   if (req.query.category) query['category'] = req.query.category;
@@ -56,7 +50,8 @@ router.get("/items/:category", (req, res, next) => {
 router.post("/outfits", async (req, res) => {
   try {
   const newOutfit = new Outfit({
-    items: req.body
+    outfitCategory: req.body.outfitCategory.outfitCategory,
+    items: req.body.items
   });
   await newOutfit.save(newOutfit)
     res.json(newOutfit);

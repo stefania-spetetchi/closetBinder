@@ -24,6 +24,7 @@ const OutfitsView = () => {
           {outfits?.map(function (outfit) {
             return (
               <div className="outfit" key={outfit._id}>
+                <p className="outfit-category-label">{outfit.outfitCategory}</p>
                 {outfit.items.map(function (item) {
                   return (
                     <div>

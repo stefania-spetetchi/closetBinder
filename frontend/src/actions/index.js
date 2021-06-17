@@ -35,7 +35,6 @@ export function getItems(categoryQuery) {
 }
 
 export function addItemToOutfit(newItem) {
-  console.log('newItem: ', newItem);
   return {
     type: ADD_ITEM_TO_OUTFIT,
     payload: newItem[0],
@@ -43,7 +42,6 @@ export function addItemToOutfit(newItem) {
 }
 
 export function removeItemById(searchId) {
-  console.log(searchId);
   return {
     type: REMOVE_ITEM_TO_OUTFIT,
     payload: searchId,
@@ -62,9 +60,9 @@ export function getOutfits() {
     });
 }
 
-export function createOutfit(outfitItems) {
+export function createOutfit(tempOutfit) {
   return axios
-    .post('http://localhost:8000/outfits', outfitItems)
+    .post('http://localhost:8000/outfits', tempOutfit)
     .then((response) => ({
       type: POST_OUTFIT,
       payload: response,

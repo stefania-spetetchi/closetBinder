@@ -1,13 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import _ from 'lodash';
-import {
-  getItems,
-  addItemToOutfit,
-  removeItemById,
-  createOutfit,
-  startOver,
-} from '../actions';
+import { getItems, addItemToOutfit } from '../actions';
+import TempOutfitView from './tempOutfitView';
 import NavBar from './navBar';
 import OutfitsView from './outfitsView';
 import './style.css';
@@ -30,39 +25,29 @@ const Outfits = () => {
       newItem[0].category === 'Shoes' &&
       outfitItemsCategories.includes(newItem[0].category)
     ) {
-      // return console.log('alert1');
-      return (
-        <div className="alert alert-danger" role="alert">
-          This is a danger alert—check it out!
-        </div>
-      );
+      return console.log('alert1');
+      // return (
+      //   <div className="alert alert-danger" role="alert">
+      //     This is a danger alert—check it out!
+      //   </div>
+      // );
     }
-    if (outfitItemsIds.includes(newItem[0]._id)) {
+    if (outfitItemsIds?.includes(newItem[0]._id)) {
       return console.log('alert2');
     }
     dispatch(addItemToOutfit(newItem));
   };
 
-  const handleRemove = (searchId) => {
-    dispatch(removeItemById(searchId));
-  };
-
-  const handleCreate = () => {
-    dispatch(createOutfit(outfitItems));
-  };
-
-  const handleStartOver = () => {
-    dispatch(startOver(outfitItems));
-  };
-
   function renderItems() {
-    if (!_.isEmpty(items)) {
-      return items?.map((item) => (
+    const sortedItems = items?.sort((a, b) =>
+      a.category.localeCompare(b.category)
+    );
+    if (!_.isEmpty(sortedItems)) {
+      return sortedItems?.map((item) => (
         <div className="container-add">
           <img
             key={item._id}
             // eslint-disable-next-line react/no-unknown-property
-            // itemId={item._id}
             src={item.imageUrl}
             alt=""
             width="100"
@@ -72,8 +57,10 @@ const Outfits = () => {
           <button
             type="button"
             aria-label="Add"
-            className="fas fa-plus add-item-to-outfit"
-            onClick={() => handleAdd(item._id)}
+            className="add-item-to-outfit"
+            onClick={() => {
+              handleAdd(item?._id);
+            }}
           >
             Add
           </button>
@@ -81,60 +68,6 @@ const Outfits = () => {
       ));
     }
     return <p>Oops! Your closet is empty!</p>;
-  }
-
-  function renderTempOutfit() {
-    const sortedOutfitItems = outfitItems.sort((a, b) =>
-      a.category.localeCompare(b.category)
-    );
-    if (!_.isEmpty(outfitItems)) {
-      return (
-        <div className="temporary-outfit">
-          {sortedOutfitItems.map((nestedItem) => (
-            <div>
-              <div className="container-outfit">
-                <img
-                  key={nestedItem._id}
-                  // remItemId={nestedItem._id}
-                  src={nestedItem?.imageUrl}
-                  alt=""
-                  width="75"
-                  className="items-in-outfit"
-                />
-                <button
-                  type="submit"
-                  className="remove-item-from-outfit"
-                  onClick={() => handleRemove(nestedItem._id)}
-                >
-                  Remove
-                </button>
-              </div>
-            </div>
-          ))}
-          <div className="create-and-startOver">
-            <button
-              onClick={() => handleCreate()}
-              className="create-outfit"
-              type="submit"
-            >
-              Create Outfit
-            </button>
-            <button
-              onClick={() => handleStartOver()}
-              className="start-over"
-              type="submit"
-            >
-              Start Over
-            </button>
-          </div>
-        </div>
-      );
-    }
-    return (
-      <p className="error">
-        Oops! this is empty! Start adding items from your close!
-      </p>
-    );
   }
 
   return (
@@ -145,7 +78,9 @@ const Outfits = () => {
         <div className="outfits-container outfits-layout">{renderItems()}</div>
         <br />
         <h6>Your Outfit:</h6>
-        <div>{renderTempOutfit()}</div>
+        <div>
+          <TempOutfitView />
+        </div>
         <br />
         <div>
           <OutfitsView />
