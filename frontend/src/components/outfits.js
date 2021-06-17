@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { Row, Col, Toast } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import { getItems, addItemToOutfit } from '../actions';
 import TempOutfitView from './tempOutfitView';
@@ -12,28 +13,27 @@ const Outfits = () => {
   const dispatch = useDispatch();
   const { outfitItems } = useSelector((state) => state.outfitItems);
 
+  const [showToast, setShowToast] = useState(false);
+
+  const toggleShowA = () => setShowToast(!showToast);
+
   useEffect(() => {
     dispatch(getItems());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getItems]);
 
   const handleAdd = (searchId) => {
-    const newItem = items.filter((item) => item._id === searchId);
-    const outfitItemsCategories = outfitItems.map((a) => a.category);
+    const outfitItemsCategories = outfitItems?.map((a) => a?.category);
     const outfitItemsIds = outfitItems.map((a) => a._id);
+    const newItem = items?.filter((item) => item?._id === searchId);
     if (
       newItem[0].category === 'Shoes' &&
       outfitItemsCategories.includes(newItem[0].category)
     ) {
-      return console.log('alert1');
-      // return (
-      //   <div className="alert alert-danger" role="alert">
-      //     This is a danger alert—check it out!
-      //   </div>
-      // );
+      return setShowToast(true);
     }
     if (outfitItemsIds?.includes(newItem[0]._id)) {
-      return console.log('alert2');
+      return setShowToast(true);
     }
     dispatch(addItemToOutfit(newItem));
   };
@@ -78,6 +78,23 @@ const Outfits = () => {
         <div className="outfits-container outfits-layout">{renderItems()}</div>
         <br />
         <h6>Your Outfit:</h6>
+        <Row>
+          <Col xs={6}>
+            <Toast show={showToast} onClose={toggleShowA}>
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded mr-2"
+                  alt=""
+                />
+                <strong className="mr-auto">Tiny Alert</strong>
+              </Toast.Header>
+              <Toast.Body>
+                You already have this exact or similar item in your outfit :)
+              </Toast.Body>
+            </Toast>
+          </Col>
+        </Row>
         <div>
           <TempOutfitView />
         </div>
