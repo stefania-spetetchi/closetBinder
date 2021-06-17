@@ -1,70 +1,81 @@
-# Getting Started with Create React App
+<p align="center">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">Closet Binder App</h3>
+  <p align="center">
+  </p>
+  <br />
+  <p align="center">Closet Binder is a high-level virtual depiction of your actual wardrobe, where you can upload pictures of each item in your closet, categorize them and create outfits for every occasion. The app helps you easily identifying gaps, shopping needs and rediscover forgotten treasures.
+.</p>
+  
+  <p align="center">
+    <br />
+    <a href="https://github.com/stefania-spetetchi/closetBinder">View Open Issues</a>
+    ·
+    <a href="https://github.com/stefania-spetetchi/closetBinder">Report Bug</a>
+    ·
+    <a href="https://github.com/stefania-spetetchi/closetBinder">Request Feature</a>
+  </p>
+</p>
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+<p align="left">
+<h3 align="left"><strong>About The Project</strong></h3>
+</p>
 
-### `npm start`
+### Functionality
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Upload, categorize, delete photos of your clothing items.
+* Create and view outfits.
+* Categorize and delete outfits.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Built With
 
-### `npm test`
+* [React](https://reactjs.org/)
+* [Redux](https://react-redux.js.org/)
+* [Node](https://nodejs.org/en/)
+* [Mongoose](https://mongoosejs.com/)
+* [Express](https://expressjs.com/)
+* [Bootstrap](https://getbootstrap.com)
+* [Cloudinary](https://cloudinary.com/documentation)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### Prerequisites
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/stefania-spetetchi/closetBinder
+   ```
+2. Install NPM packages in Frontend
+   ```sh
+   cd frontend
+   npm install
+   cd -
+   ```
+3. Install NPM packages in Backend
+   ```sh
+   cd backend
+   npm install
+   ```
+4. Go to Cloudinary -> https://cloudinary.com/users/register/free and generate your free API key
+5. Create an .env file in the Backend folder and add the API key details
+6. Add the .env file to your .gitignore
 
-### `npm run eject`
+ ## Contributing
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Any contributions you make are appreciated!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b newFeature`)
+3. Commit your Changes (`git commit -m 'Add a newFeature'`)
+4. Push to the Branch (`git push origin newFeature`)
+5. Open a Pull Request
+  
+ 
