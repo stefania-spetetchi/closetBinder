@@ -4,7 +4,8 @@
   <p align="center">
   </p>
   <br />
-  <p align="center">This project .</p>
+  <p align="center">Closet Binder is a high-level virtual depiction of your actual wardrobe, where you can upload pictures of each item in your closet, categorize them and create outfits for every occasion. The app helps you easily identifying gaps, shopping needs and rediscover forgotten treasures.
+.</p>
   
   <p align="center">
     <br />
@@ -24,7 +25,9 @@
 
 ### Functionality
 
-* The main page
+* Upload, categorize, delete photos of your clothing items.
+* Create and view outfits.
+* Categorize and delete outfits.
 
 ### Built With
 
