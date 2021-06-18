@@ -347,5 +347,35 @@ h6 {
 
 .css-1hb7zxy-IndicatorsContainer {
   background-color: #F0EFEA;
+}
 
+.toast {
+  width: 380px !important;
+  margin-left: 20px;
+  background-color: #C0B2B5 !important;
+  font-size: small !important;
+}
+
+.toast-header {
+  background-color: #F0EFEA !important;
+  color: #A10115 !important;
+}
+
+.close.ml-2.mb-1 {
+  margin: 10px 10px 10px 220px;
+  padding: 1px 7px !important;
+  color: black !important;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: small;
+  border-radius: 25px;
+  border: solid 0.05em #C0B2B5 !important;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.sr-only {
+  margin-left: 3px !important;
 }

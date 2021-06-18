@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, setState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getItems } from '../actions';
 
 const AddItem = () => {
   const history = useHistory();
@@ -8,6 +10,8 @@ const AddItem = () => {
     image: '',
     imageUrl: '',
   });
+
+  const dispatch = useDispatch();
 
   const handleChange = (category) => (e) => {
     const value = category === 'image' ? e.target.files[0] : e.target.value;
@@ -27,6 +31,7 @@ const AddItem = () => {
       if (response.ok) {
         setData({ category: '', image: '', imageUrl: '' });
         history.replace('/closet');
+        dispatch(getItems());
       }
     } catch (error) {
       console.log(error);
