@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import _ from 'lodash';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteItem } from '../actions';
 import './style.css';
 
 const Items = (props) => {
   const dispatch = useDispatch();
-
+  const { error } = useSelector((state) => state.items);
   const handleRemoveItem = (itemId) => {
     dispatch(deleteItem(itemId));
   };
 
-  if (!_.isEmpty(props.items)) {
+  if (_.isEmpty(error) && !_.isEmpty(props.items)) {
     return props.items.map((item) => (
       <div>
         <div className="closet-layout col-md-3">
@@ -34,6 +34,13 @@ const Items = (props) => {
         </div>
       </div>
     ));
+  }
+  if (!_.isEmpty(error)) {
+    return (
+      <div className="float-container error col-md-8">
+        <p>Sorry, something went wrong, please try again at a later time.</p>
+      </div>
+    );
   }
   return <div>Nothing here</div>;
 };

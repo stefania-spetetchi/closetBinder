@@ -10,6 +10,7 @@ import './style.css';
 
 const Outfits = () => {
   const { items } = useSelector((state) => state.items);
+  const { error } = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const { outfitItems } = useSelector((state) => state.outfitItems);
 
@@ -42,7 +43,7 @@ const Outfits = () => {
     const sortedItems = items?.sort((a, b) =>
       a.category.localeCompare(b.category)
     );
-    if (!_.isEmpty(sortedItems)) {
+    if (_.isEmpty(error) && !_.isEmpty(sortedItems)) {
       return sortedItems?.map((item) => (
         <div className="container-add">
           <img
@@ -66,6 +67,13 @@ const Outfits = () => {
           </button>
         </div>
       ));
+    }
+    if (!_.isEmpty(error)) {
+      return (
+        <div className="float-container error col-md-8">
+          <p>Sorry, something went wrong, please try again at a later time.</p>
+        </div>
+      );
     }
     return <p>Oops! Your closet is empty!</p>;
   }
