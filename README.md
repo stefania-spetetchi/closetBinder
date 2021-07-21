@@ -37,6 +37,7 @@
 * [Mongoose](https://mongoosejs.com/)
 * [Express](https://expressjs.com/)
 * [Bootstrap](https://getbootstrap.com)
+* [React-Bootstrap](https://react-bootstrap.github.io/)
 * [Cloudinary](https://cloudinary.com/documentation)
 
 
