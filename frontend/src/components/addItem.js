@@ -72,7 +72,7 @@ const AddItem = () => {
       </div>
       <div className="text-center">
         <button
-          className="uploadItem btn-primary"
+          className="btn btn-primary"
           onClick={handleSubmit}
           type="submit"
         >

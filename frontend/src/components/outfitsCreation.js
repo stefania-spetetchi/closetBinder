@@ -5,10 +5,9 @@ import _ from 'lodash';
 import { getItems, addItemToOutfit } from '../actions';
 import TempOutfitView from './tempOutfitView';
 import NavBar from './navBar';
-import OutfitsView from './outfitsView';
 import './style.css';
 
-const Outfits = () => {
+const OutfitsCreation = () => {
   const { items } = useSelector((state) => state.items);
   const { error } = useSelector((state) => state.items);
   const dispatch = useDispatch();
@@ -54,11 +53,11 @@ const Outfits = () => {
             width="100"
             className="items"
           />
-          <p className="category-label">{item.category}</p>
+          <p className="d-flex justify-content-center">{item.category}</p>
           <button
             type="button"
             aria-label="Add"
-            className="add-item-to-outfit"
+            className="btn btn-secondary btn-sm"
             onClick={() => {
               handleAdd(item?._id);
             }}
@@ -95,7 +94,7 @@ const Outfits = () => {
                   className="rounded mr-2"
                   alt=""
                 />
-                <strong className="mr-auto">Tiny Alert</strong>
+                <strong className="mr-auto">Alert</strong>
               </Toast.Header>
               <Toast.Body>
                 You already have this exact or similar item in your outfit :)
@@ -107,12 +106,9 @@ const Outfits = () => {
           <TempOutfitView />
         </div>
         <br />
-        <div>
-          <OutfitsView />
-        </div>
       </div>
     </div>
   );
 };
 
-export default Outfits;
+export default OutfitsCreation;

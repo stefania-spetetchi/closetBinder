@@ -12,8 +12,8 @@ const FrontPage = () => (
           width="600"
         />
         <h3 className="heading display-4">Welcome to your Closet Binder</h3>
-        <button type="submit" className="login nav-link" href="#">
-          Log in with Google (in progress)
+        <button type="submit" className="btn btn-primary" href="#">
+          Log in with Google
         </button>
       </div>
     </div>

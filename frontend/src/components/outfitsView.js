@@ -1,7 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import _ from 'lodash';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getOutfits, deleteOutfit } from '../actions';
+import NavBar from './navBar';
 import './style.css';
 
 const OutfitsView = () => {
@@ -18,6 +22,16 @@ const OutfitsView = () => {
     dispatch(deleteOutfit(outfitId));
   };
 
+  const handleOutfitEdit = (outfitId) => {
+    // dispatch(editOutfit(outfitId));
+    console.log(`clicked on ID: ${outfitId}`);
+  };
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   function renderOutfitsView() {
     if (_.isEmpty(error)) {
       return (
@@ -33,7 +47,7 @@ const OutfitsView = () => {
                     </p>
                     {outfit.items.map(function (item) {
                       return (
-                        <div>
+                        <div className="float-start" key={item._id}>
                           <img
                             // eslint-disable-next-line react/no-unknown-property
                             src={item.imageUrl}
@@ -45,12 +59,83 @@ const OutfitsView = () => {
                       );
                     })}
                     <button
-                      className="delete-outfit"
+                      className="btn btn-danger btn-sm align-content-center"
                       type="submit"
                       onClick={() => handleOutfitDelete(outfit._id)}
                     >
                       Delete
                     </button>
+                    <button
+                      className="btn btn-secondary btn-sm align-content-center"
+                      type="submit"
+                      // onClick={() => handleOutfitEdit(outfit._id)}
+                      onClick={handleShow}
+                    >
+                      Edit
+                    </button>
+                    <Modal show={show} onHide={handleClose}>
+                      <Modal.Header>
+                        <Modal.Title>Edit outfit</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <Form noValidate>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicName"
+                          >
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                              type="name"
+                              placeholder="Enter a name for your outfit"
+                            />
+                          </Form.Group>
+
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicDescription"
+                          >
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control
+                              type="description"
+                              placeholder="Description"
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicValue"
+                          >
+                            <Form.Label>Value ($)</Form.Label>
+                            <Form.Control
+                              type="value"
+                              placeholder="What is this outfit worth?"
+                            />
+                          </Form.Group>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicDate"
+                          >
+                            <Form.Label>Date to Wear</Form.Label>
+                            <Form.Control
+                              type="date"
+                              placeholder="When will you wear this outfit?"
+                            />
+                            <Form.Switch
+                              type="switch"
+                              id="custom-switch"
+                              label="Rain safe"
+                            />
+                          </Form.Group>
+                        </Form>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                          Close
+                        </Button>
+                        <Button variant="primary" onClick={handleClose}>
+                          Save Changes
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 );
               })}
@@ -65,7 +150,15 @@ const OutfitsView = () => {
       </div>
     );
   }
-  return <div>{renderOutfitsView()}</div>;
+  return (
+    <div>
+      <NavBar />
+      <div className="closet-section">
+        {renderOutfitsView()}
+        {/* <ModalToggle /> */}
+      </div>
+    </div>
+  );
 };
 
 export default OutfitsView;

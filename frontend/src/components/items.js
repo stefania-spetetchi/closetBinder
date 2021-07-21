@@ -26,7 +26,7 @@ const Items = (props) => {
             />
             <button
               type="button"
-              className="delete-item btn-close"
+              className="btn-close"
               aria-label="Close"
               onClick={() => handleRemoveItem(item._id)}
             />

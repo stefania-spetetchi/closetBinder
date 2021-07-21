@@ -28,6 +28,8 @@ const TempOutfitView = () => {
 
   const handleCreate = () => {
     dispatch(createOutfit(tempOutfit));
+    alert('your outfit was successfully created');
+    dispatch(startOver(outfitItems));
   };
 
   const handleStartOver = () => {
@@ -53,7 +55,7 @@ const TempOutfitView = () => {
                 />
                 <button
                   type="submit"
-                  className="remove-item-from-outfit"
+                  className="btn btn-danger btn-sm"
                   onClick={() => handleRemove(nestedItem._id)}
                 >
                   Remove
@@ -61,10 +63,10 @@ const TempOutfitView = () => {
               </div>
             </div>
           ))}
-          <div className="create-and-startOver">
-            <div className="mb-4">
+          <div className="mx-1 create-and-startOver">
+            <div className="dropdown mt-1 mb-1">
               <select
-                className="outfit form-control"
+                className="form-control"
                 placeholder="Enter category"
                 type="text"
                 category="outfitCategory"
@@ -80,14 +82,14 @@ const TempOutfitView = () => {
             </div>
             <button
               onClick={() => handleCreate()}
-              className="create-outfit"
+              className="btn btn-primary"
               type="submit"
             >
               Create Outfit
             </button>
             <button
               onClick={() => handleStartOver()}
-              className="start-over"
+              className="btn btn-primary mx-2"
               type="submit"
             >
               Start Over
@@ -97,9 +99,7 @@ const TempOutfitView = () => {
       );
     }
     return (
-      <p className="error">
-        Oops! this is empty! Start by adding items from your closet.
-      </p>
+      <p className="error">Empty! Start by adding items from your closet.</p>
     );
   }
   return (

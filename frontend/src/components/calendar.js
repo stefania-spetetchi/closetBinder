@@ -1,5 +1,6 @@
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import 'bootstrap';
 import { useState } from 'react';
 import NavBar from './navBar';
 import './style.css';
