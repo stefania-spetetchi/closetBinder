@@ -10,6 +10,7 @@ const url = require("url");
 var querystring = require('querystring');
 var bodyParser = require('body-parser');
 const app = express();
+const moment = require('moment');
 
 app.use(cors());
 router.use(bodyParser.json());
@@ -105,12 +106,15 @@ router.put("/outfits/:outfit", (req, res) => {
     .then(outfitFound => {
       if (!outfitFound) { return res.status(404).end(); }
       else if (outfitFound) {
-        outfitFound.name = req.body.name;
-        outfitFound.outfitCategory = req.body.outfitCategory;
-        outfitFound.items = req.body.items;
+        outfitFound.name = req.body.name ? req.body.name : outfitFound.name;
+        outfitFound.description = req.body.description;
+        outfitFound.price = req.body.price;
+        outfitFound.dateToWear = outfitFound.dateToWear ? [...outfitFound.dateToWear, req.body.dateToWear] : [req.body.dateToWear];
+        outfitFound.outfitCategory = req.body.category ? req.body.category : outfitFound.outfitCategory;
+        outfitFound.items = outfitFound.items;
       }
       outfitFound.save();
-        res.status(200).json(outfitFound);  
+        res.status(200);  
     });
 }); 
 

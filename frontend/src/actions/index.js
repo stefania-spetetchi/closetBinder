@@ -8,6 +8,7 @@ export const REMOVE_ITEM_TO_OUTFIT = 'REMOVE_ITEM_TO_OUTFIT';
 export const GET_OUTFITS = 'GET_OUTFITS';
 export const GET_OUTFITS_ERROR = 'GET_OUTFITS_ERROR';
 export const POST_OUTFIT = 'POST_OUTFIT';
+export const PUT_OUTFIT = 'PUT_OUTFIT';
 export const REMOVE_ALL_ITEMS_FROM_OUTFIT = 'REMOVE_ALL_ITEMS_FROM_OUTFIT';
 
 export function getItems(categoryQuery) {
@@ -91,6 +92,14 @@ export function deleteOutfit(outfitId) {
     .then(() => getOutfits())
     .catch((error) => {
       alert('Error!!!');
+    });
+}
+
+export function editOutfit(outfitId, data) {
+  return axios
+    .put(`http://localhost:8000/outfits/${outfitId}`, data)
+    .catch((error) => {
+      alert('Error');
     });
 }
 

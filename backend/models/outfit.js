@@ -7,8 +7,8 @@ const OutfitSchema = new Schema({
   items: [{type: Schema.Types.ObjectId, ref: "Item"}],
   name: '',
   description: '',
-  value: '',
-  dateToWear: ''
+  price: '',
+  dateToWear: [],
 });
 
 module.exports = mongoose.model("Outfit", OutfitSchema);
