@@ -23,7 +23,7 @@ ReactDOM.render(
         <Route path="/closet" component={ClosetItems} />
         <Route path="/outfits" component={OutfitsCreation} />
         <Route path="/outfits-view" component={OutfitsView} />
-        <Route path="/calendar" component={CalendarView} />
+        {/* <Route path="/calendar" component={CalendarView} /> */}
       </Switch>
     </BrowserRouter>
   </Provider>,

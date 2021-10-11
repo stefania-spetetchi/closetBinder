@@ -33,6 +33,16 @@ const OutfitsView = () => {
     dispatch(deleteOutfit(outfitId));
   };
 
+  const dates = outfits.map(function (outfit) {
+    return outfit.dateToWear;
+  });
+
+  // eslint-disable-next-line prefer-spread
+  const allDates = [].concat.apply([], dates);
+  const uniqueDates = new Set(allDates);
+  const uniqueDatesArray = [...uniqueDates];
+  console.log(uniqueDatesArray);
+
   function renderOutfitsView() {
     if (_.isEmpty(error)) {
       return (
@@ -104,7 +114,7 @@ const OutfitsView = () => {
       <div className="closet-section">
         {renderOutfitsView()}
         <EditOutfit show={show} setShow={setShow} outfit={selectedOutfit} />
-        {/* <Calendar /> */}
+        <Calendar dates={uniqueDatesArray} />
       </div>
     </div>
   );

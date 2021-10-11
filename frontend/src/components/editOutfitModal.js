@@ -9,6 +9,7 @@ import { editOutfit, getOutfits } from '../actions';
 import './style.css';
 
 const EditOutfit = (props) => {
+  console.log(props);
   const dispatch = useDispatch();
   const [data, setData] = useState({
     _id: '',

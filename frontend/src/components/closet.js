@@ -13,14 +13,9 @@ const ClosetItems = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getItems());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getItems]);
-
-  useEffect(() => {
     dispatch(getItems(query));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
+  }, [getItems, query]);
 
   return (
     <div>
