@@ -1,21 +1,23 @@
 require('dotenv').config();
-import express, { Router } from "../node_modules/express";
-const router = Router();
-import Item, { find, findById, findByIdAndRemove } from "../models/item";
-import Outfit, { find as _find, findById as _findById, findByIdAndRemove as _findByIdAndRemove } from "../models/outfit";
-import { uploader } from '../utils/cloudinary';
-import { single } from "../utils/multer";
-import cors from 'cors';
-import { json } from 'body-parser';
+const express = require("../node_modules/express");
+const router = express.Router();
+const Item = require("../models/item");
+const Outfit = require("../models/outfit");
+const cloudinary = require('../utils/cloudinary');
+const upload = require("../utils/multer");
+const cors = require('cors');
+const url = require("url");
+var querystring = require('querystring');
+var bodyParser = require('body-parser');
 const app = express();
 
 app.use(cors());
-router.use(json());
+router.use(bodyParser.json());
 
 router.get("/items", (req, res, next) => {
   let query = {};
   if (req.query.category) query['category'] = req.query.category;
-  find(query)
+  Item.find(query)
     .exec((err, items) => {
       if (err) return next(err);
         res.send(items);
@@ -23,7 +25,15 @@ router.get("/items", (req, res, next) => {
 });
 
 router.get("/items/:item", (req, res, next) => {
-  findById(req.params.item)
+  Item.findById(req.params.item)
+    .then(itemFound => {
+      if (!itemFound) { return req.status(403).end();}
+      return res.status(200).json(itemFound);
+    })
+    .catch((err) => next(err))
+});
+router.get("/items/:category", (req, res, next) => {
+  Item.findById(req.params.item)
     .then(itemFound => {
       if (!itemFound) { return req.status(403).end();}
       return res.status(200).json(itemFound);
@@ -31,19 +41,9 @@ router.get("/items/:item", (req, res, next) => {
     .catch((err) => next(err))
 });
 
-router.get("/items/:category", (req, res, next) => {
-  findById(req.params.item)
-    .then(itemFound => {
-      if (!itemFound) { 
-        return req.status(403).end();}
-      return res.status(200).json(itemFound);
-    })
-    .catch((err) => next(err))
-});
-
-router.post("/items", single("image"), async (req, res) => {
+router.post("/items", upload.single("image"), async (req, res) => {
   try {
-    const result = await uploader.upload(req.file.path);
+    const result = await cloudinary?.uploader.upload(req.file.path);
     let item = new Item({
       outfits: [],
       category: req.body.category,
@@ -55,9 +55,8 @@ router.post("/items", single("image"), async (req, res) => {
   } catch (err) {
     console.log(err);
   }}); 
-
 router.delete("/items/:item", (req, res) => {
-  findByIdAndRemove(req.params.item)
+  Item.findByIdAndRemove(req.params.item)
     .then(itemFound => {
       if (!itemFound) { return res.status(404).end(); }
       else if (itemFound) {
@@ -66,7 +65,6 @@ router.delete("/items/:item", (req, res) => {
     })
     .catch(err => next(err))
 });
-
 router.post("/outfits", async (req, res) => {
   try {
   const newOutfit = new Outfit({
@@ -81,7 +79,8 @@ router.post("/outfits", async (req, res) => {
 });
 
 router.get("/outfits", (req, res, next) => {
-  _find((err, outfits) => {
+  Outfit
+    .find((err, outfits) => {
     res.send(outfits); 
   })
     .populate("items")
@@ -94,7 +93,7 @@ router.get("/outfits", (req, res, next) => {
 });
 
 router.put("/outfits/:outfit", (req, res) => {
-  _findById(req.params.outfit) 
+  Outfit.findById(req.params.outfit) 
     .then(outfitFound => {
       if (!outfitFound) { return res.status(404).end(); }
       else if (outfitFound) {
@@ -111,7 +110,7 @@ router.put("/outfits/:outfit", (req, res) => {
 }); 
 
 router.delete("/outfits/:outfit", (req, res) => {
-  _findByIdAndRemove(req.params.outfit)
+  Outfit.findByIdAndRemove(req.params.outfit)
     .then(outfitFound => {
       if (!outfitFound) { return res.status(404).end(); }
       else if (outfitFound) {
@@ -120,4 +119,4 @@ router.delete("/outfits/:outfit", (req, res) => {
     .catch(err => next(err))
 });
 
-export default router;
+module.exports = router;
